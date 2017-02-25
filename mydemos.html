@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<style type="text/css">
+	body {
+  background: #FFF;
+}
+.layout {
+  width: 800px;
+  margin: 0 auto;
+}
+.layout h1 {
+  display: block;
+  text-align: center;
+  font-size: 42px;
+ /*  color: rgba(0,0,0,0.6); */
+  color: #458B74;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #000;
+}
+.layout p {
+  text-align: center;
+  color: rgba(0,0,0,0.5)
+}
+.layout div {
+  text-align: center;
+}
+.layout ul {
+  padding: 0;
+  list-style: none;
+  display:inline-block;
+  
+}
+
+.layout ul:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.layout li{
+  float: left;
+  position: relative;
+  margin-left:10px;
+  border-radius: 3px;
+  
+}
+
+.layout a{
+  display: inline-block;
+  padding: 5px 10px;
+  color: #FFF;
+  text-decoration: none;
+  border-radius: 3px;
+  
+}
+
+.btm-bgcolor1 {
+  background: rgba(255,23,14,0.2);
+}
+.btm-bgcolor2 {
+  background: rgba(255,23,14,.4);
+}
+.btm-bgcolor3 {
+  background: rgba(255,23,14,.6);
+}
+.btm-bgcolor4 {
+  background: rgba(255,23,14,.8);
+}
+.btm-bgcolor5 {
+  background: rgba(255,23,14,1);
+}
+
+.layout a:hover {
+  background: #000;
+}
+
+.btm-footer {
+  background: #458B74;
+  margin-left: 10px;
+    
+}
+.img1 {
+  width: 400px;
+  margin:30px auto;
+}
+.img1 img{
+  width: 100%;
+}
+</style>
+</head>
+<body>
+	<div class="layout">
+    <h1>我的项目</h1>
+    <p>这是yang的项目集</p>
+    <div>
+      <ul>
+        <li ><a href="#" class="btm-bgcolor1">项目1</a></li>
+        <li><a href="#" class="btm-bgcolor2">项目2</a></li>
+        <li><a href="#" class="btm-bgcolor3">项目3</a></li>
+        <li><a href="#" class="btm-bgcolor4">项目4</a></li>
+        <li><a href="#" class="btm-bgcolor5">项目5</a></li>
+      </ul>
+    </div>
+    <div class='img1'><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1488014576989&di=4f28acf7a88611708f2db245c0e54f1c&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F13%2F28%2F32%2F65M58PICAcq_1024.jpg" alt=""></div>
+    <div>
+      <a href="#" class="btm-footer">查看源码</a>
+      <a href="#" class="btm-footer">使用说明</a>
+      <br>
+      <p>作者：<span style="color:#458B74;">yang</:span></p>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+
+<meta name="robots" content="noindex">
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>yujingyangcode</title>
+  <link rel="stylesheet" type="text/css" href="./iconfont.css">
+<style type="text/css">
+* { 
+  margin:0px; 
+  padding:0px;
+}
+
+.layout {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.clear:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.nav {
+  position: fixed;
+  background: rgba(0,0,0,0.3);
+  height: 30px;
+  width: 100%;
+  padding-top: 10px;
+  z-index: 1000;
+}
+.nav ul {
+  float: right;
+}
+.nav li {
+  float: left;
+  list-style-type: none;
+  position: relative;
+  
+}
+.nav a {
+  display: block;
+  text-decoration: none;
+  color: #FFF;
+  padding: 5px 15px;
+  border-radius: 2px 2px 0px 0px;
+  
+}
+.nav .drop {
+  visibility: hidden;
+  opacity:0; 
+  position:absolute;
+  top: 100%;
+  left: 0;
+  width: 110px;
+  background: rgba(0,0,0,0.3);
+  
+}
+.drop a{
+  border-radius: 0px;
+}
+.nav a:hover {
+  color: #000;
+  background: #BFEFFF;
+  transition: background 1s;
+  -moz-transition: background 1s; 
+  -webkit-transition: background 1s;
+  -o-transition: background 1s; 
+}
+li:hover .drop{
+  visibility: visible;   
+  opacity: 1; 
+  
+  transition: opacity 1s;
+  -moz-transition: opacity 1s; 
+  -webkit-transition: opacity 1s;
+  -o-transition: opacity 1s; 
+}
+
+#header {
+  background: url(./img/header-bg.jpg) no-repeat;
+  background-size: 100%;
+ 
+}
+.header-content {
+  text-align: center;
+  padding-top: 250px;
+  padding-bottom: 180px;
+}
+.s-heading {
+  color: #FFF;
+  font-size: 35px;
+  margin-bottom: 25px;
+  font-family:  'Microsoft YaHei','STHeiti Light';
+  font-weight: lighter;
+  letter-spacing: 15px;
+}
+.heading {
+  color: #FFF;
+  font-size: 100px;
+  font-family: 'FZYaoti','SimHei','Microsoft YaHei';
+  font-weight: 700;
+  margin-bottom: 50px;
+  letter-spacing: 10px;
+}
+#header a {
+  font-size: 20px;
+  display: block;
+  display: inline-block;
+  padding: 15px 60px;
+  color: #FFF;
+  text-decoration: none;
+  border-radius: 3px;
+  background: #00B2EE;
+  transition: background 0.5s;
+  -moz-transition: background 0.5s; 
+  -webkit-transition: background 0.5s;
+  -o-transition: background 0.5s; 
+
+}
+
+#header a:hover {
+  background: #BFEFFF;
+}
+
+
+#biography {
+  background: #FFF;
+  min-height: 650px;
+}
+.content-head {
+  text-align: center;
+  padding-top: 100px;
+  margin-bottom: 30px;
+}
+.content-head h1 {
+  color: rgba(0,0,0,0.7);
+}
+.content-head h4{
+  display: inline-block;
+  color: rgba(0,0,0,0.5);
+  margin: 15px 0px;
+  font-weight: normal; 
+}
+.biography-centent {
+  margin-left: -50px;
+}
+.biography-box {
+  visibility: visible; 
+  width: 300px;
+  float: left;
+  margin-left: 50px;
+  text-align:center;
+}
+.biography-imgbox {
+  width: 150px;
+  height: 150px;
+  background: rgba(0,0,0,0.1);
+  margin:0 auto;
+  border-radius: 50%;
+}
+#biography-imgbox1 {
+  background: url(./img/biography-imgbox1.jpg) no-repeat;
+  background-size: 100%;
+  background-position: center;
+}
+#biography-imgbox2 {
+  background: url(./img/biography-imgbox2.jpg) no-repeat;
+  background-size: 100%;
+  background-position:center;
+}
+#biography-imgbox3 {
+  background: url(./img/biography-imgbox3.jpg) no-repeat;
+  background-size: 100%;
+  background-position:center;
+}
+
+.biography-box h4 {
+  display:block;
+  color: #6495ED;
+  margin: 20px 0px;
+}
+.biography-box p {
+  display:block;
+  color: rgba(0,0,0,0.6);
+  font-size: 14px;
+}
+#compositions {
+  background: url(./img/compositions-bg.jpg) no-repeat;;
+  background-size: auto 100%;
+  min-height: 1000px;
+  
+}
+.compositions-centent {
+  margin-left: -50px;
+}
+.compositions-box {
+  position: relative;
+  width: 300px;
+  float: left;
+  margin-left: 50px;
+  margin-bottom: 60px;
+  text-align:center;
+  background: #FFF;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)!important;
+}
+.compositions-imgbox {
+  width: 100%;
+  height: 200px;
+  background: rgba(0,0,0,0.2);
+}
+.compositions-box h4 {
+  display:block;
+  color: rgba(0,0,0,0.7);
+  margin: 20px 0px;
+}
+.img-hover {
+  visibility: hidden;
+  opacity: 0; 
+  position:absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  background: rgba(255,255,255,0.4);
+}
+
+.compositions-box>a:hover .img-hover{
+  visibility: visible;
+  opacity: 1; 
+ 
+  transition: all 1s;
+  -moz-transition: all 1s; 
+  -webkit-transition: all 1s;
+  -o-transition: all 1s;
+} 
+.img-hover span{
+  display: block;
+  font-size:50px;
+  text-decoration: none;
+  color: #FFF;
+  padding: 67px 15px;
+}
+#compositions-img1 {
+  background: url(./img/compositions-img1.jpg) no-repeat;
+  background-size: auto 100%;
+  background-position: center;
+}
+
+#compositions-img2 {
+  background: url(./img/compositions-img2.jpg) no-repeat;
+  background-size: auto 100%;
+  background-position: center;
+}
+
+#compositions-img3 {
+  background: url(./img/compositions-img3.jpg) no-repeat;
+  background-size: auto 100%;
+  background-position: center;
+}
+
+#compositions-img4 {
+  background: url(./img/compositions-img4.jpg) no-repeat;
+  background-size: auto 100%;
+  background-position: center;
+}
+
+#compositions-img5 {
+  background: url(./img/compositions-img5.jpg) no-repeat;
+  background-size: auto 100%;
+  background-position: center;
+}
+
+#compositions-img6 {
+  background: url(./img/compositions-img6.jpg) no-repeat;
+  background-size: auto 100%;
+  background-position: center;
+}
+#about {
+  background: #FFF;
+  min-height: 1000px;
+}
+.leftbox {
+  width:50%;
+  height:300px;
+  border-right: 2px solid rgba(0,0,0,0.2);
+  float: left;
+  position:relative;
+  text-align: right;
+  overflow: visible;
+}
+
+.left-img {
+  width: 150px;
+  height: 150px;
+  border: 3px solid rgba(0,0,0,0.2);
+  border-radius: 50%;
+  position: absolute;
+  top:0px;
+  right: -80px;
+}
+.leftbox h4{
+  display: block;
+  margin: 1px 90px;
+}
+.leftbox p {
+  display: block;
+  margin: 20px 90px;
+  color: rgba(0,0,0,0.5);
+}
+.rightbox {
+  width:50%;
+  height:300px;
+  border-left: 2px solid rgba(0,0,0,0.2);
+  float: right;
+  position:relative;
+  text-align: left;
+  overflow: visible;
+}
+.rightbox h4{
+  display: block;
+  margin: 1px 90px;
+}
+.rightbox p {
+  display: block;
+  margin: 20px 90px;
+  color: rgba(0,0,0,0.5);
+}
+.right-img {
+  width: 150px;
+  height: 150px;
+  border: 3px solid rgba(0,0,0,0.2);
+  border-radius: 50%;
+  position: absolute;
+  top:0px;
+  left: -75px;
+}
+#about-img1 {
+  background: url(./img/about-img1.jpg) ;
+  background-size: auto 100%;
+  background-position: center;
+}
+#about-img2 {
+  background: url(./img/about-img2.jpg) ;
+  background-size: auto 100%;
+  background-position: center;
+}
+#about-img3 {
+  background: url(./img/about-img3.jpg) ;
+  background-size: auto 100%;
+  background-position: center;
+}
+
+#about-img4 {
+  background: url(./img/about-img4.jpg) ;
+  background-size: auto 100%;
+  background-position: center;
+}
+#lastbox {
+  border-left: 0px;
+}
+#social {
+  background: #F0F0F0;
+  min-height: 650px;
+}
+.social-content {
+  margin-left: -50px;
+}
+.social-box {
+  position: relative;
+  width: 300px;
+  float: left;
+  margin-left: 50px;
+  margin-bottom: 60px;
+  text-align:center;
+  /* background: #FFF; */
+}
+.social-imgbox {
+  width: 150px;
+  height: 150px;
+  background: rgba(0,0,0,0.1);
+  border: 6px solid #FFF;
+  margin:0 auto;
+  border-radius: 50%;
+}
+.social-box h4 {
+  display:block;
+  color: #000;
+  margin: 30px 0px 10px 0px;
+}
+.social-box p {
+  display:block;
+  color: rgba(0,0,0,0.6);
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+#social-img1 {
+  background: url(./img/social-img1.jpg) ;
+  background-size: auto 100%;
+  background-position: center;
+}
+#social-img2 {
+  background: url(./img/social-img2.jpg) ;
+  background-size: auto 100%;
+  background-position: center;
+}
+#social-img3 {
+  background: url(./img/social-img3.jpg) ;
+  background-size: auto 100%;
+  background-position: center;
+}
+
+#joinus {
+  background: url(./img/joinus-bg.jpg);
+  background-size: 100%;
+  min-height: 650px;
+}
+.infobox {
+  width: 50%;
+  float: left;
+}
+.infobox input {
+  display: inline-block;
+  width: 430px;
+  height: 40px;
+  margin: 10px 10px;
+  padding: 10px 20px;
+  font-size: 18px;
+  border-radius: 5px;
+  border:none;
+  outline:none; 
+}
+.infobox textarea {
+  display: inline-block;
+  width: 430px;
+  height: 200px;
+  margin: 10px 10px;
+  padding: 10px 20px;
+  font-size: 18px;
+  border-radius: 5px;
+  border:none;
+  outline:none; 
+}
+.infobox input:focus,.infobox textarea:focus {
+  border: 1px solid orange;
+}
+.btn {
+  text-align: center;
+  margin-top: 20px;
+}
+.btn input {
+  font-size: 20px;
+  display: block;
+  display: inline-block;
+  padding: 15px 60px;
+  color: #FFF;
+  text-decoration: none;
+  border:none;
+  outline:none; 
+  border-radius: 3px;
+  background: #00B2EE;
+  -webkit-transition: background 0.5s;
+  transition: background 1s;
+  -moz-transition: background 1s; 
+  -o-transition: background 1s; 
+}
+
+.btn input:hover {
+  background: #BFEFFF;
+  cursor:pointer;
+}
+.btn input:active {
+  background: yellow;
+}
+#footer  {
+  background-size: 100%;
+  background: #FFF;
+  height: 70px;
+  width: 100%;
+  text-align: center;
+}
+
+#footer .iconbox{
+  margin: 10px 350px;
+}
+#footer p {
+  float: left;
+  margin: 10px;
+}
+#footer span {
+  float: right;
+  margin: 10px;
+}
+#footer span a {
+  text-decoration: none;
+  color: #FF8000;
+}
+.iconbox a {
+  text-decoration: none;
+  color: #00B2EE;
+}
+.iconfont {
+  font-size: 40px;
+}
+.iconbox a:hover {
+  color:  #FF8000;
+  transition: color 0.5s;
+  -moz-transition: color 0.5s; 
+  -webkit-transition: color 0.5s;
+  -o-transition: color 0.5s;
+}
+</style>
+</head>
+<body>
+  <div class="nav">
+    <div class="layout">
+      <ul class="clear">
+        <li><a href="#">首页</a></li>
+        <li><a href="#biography">背景简介</a></li>
+        <li><a href="#compositions">作品一览</a></li>
+        <li><a href="#about">故事简介</a></li>
+        <li>
+          <a href="#social">社交资讯</a>
+          <div class="drop">
+            <a href="#">官方网站</a>
+            <a href="#">小说合集</a>
+            <a href="#">同好会</a>
+          </div>
+        </li>
+        <li><a href="#joinus">加入会员</a></li>
+      </ul>
+    </div>
+  </div>
+  <div id="header">
+    <div class="header-content layout">
+     <div class="s-heading ">欢迎来到</div> 
+    <div class="heading">新海诚的光影世界</div> 
+      <a href="#">更多资讯</a>
+    </div>
+  </div>
+  <div id="biography">
+    <div class="layout">
+      <div class="content-head">
+        <h1>背景简介</h1>
+        <h4>天空 · 云 · 光影 · 音乐</h4>
+      </div>    <!-- biography的头部 -->
+      <div class="biography-centent clear">
+        <div class="biography-box">
+          <a href="#">
+          <div id="biography-imgbox2" class="biography-imgbox"></div>
+          </a>
+          <h4>美术画集</h4>
+          <p>新海诚的美术作品画集，画集包含了动画的场景美术、人物设定、制作技法、动画分镜  </p>
+        </div>
+          <div class="biography-box">
+          <a href="#">
+          <div id="biography-imgbox1" class="biography-imgbox"></div>
+          </a>
+          <h4>作者简介</h4>
+          <p>新海诚（Makoto Shinkai），原名：新津诚（Makoto Niitsu），日本动画导演和作家，日本长野县野泽北高等学校、日本中央大学文学部日本文学系毕业。</p>
+        </div>
+          
+        <div  class="biography-box">
+          <a href="#">
+          <div id="biography-imgbox3" class="biography-imgbox"></div>
+          </a>
+          <h4>原声音乐</h4>
+          <p>新海诚主要作品原声集+10周年专辑  </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="compositions">
+    <div class="layout">
+      <div class="content-head">
+        <h1>作品一览</h1>
+        <h4>新海诚部分作品</h4>
+      </div>
+      <div class="compositions-centent clear">
+        <div class="compositions-box">
+          <a href="#">
+            <div class="img-hover">
+              <span>+</span>
+            </div>
+            <div id="compositions-img1" class="compositions-imgbox" ></div>
+          </a>
+          <h4>你的名字</h4>
+        </div>
+        <div class="compositions-box">
+          <a href="#">
+            <div class="img-hover">
+              <span>+</span>
+            </div>
+            <div id="compositions-img2" class="compositions-imgbox"></div>
+          </a>
+          <h4>秒速5厘米</h4>
+        </div>
+        <div class="compositions-box">
+          <a href="#">
+            <div class="img-hover">
+              <span>+</span>
+            </div>
+            <div id="compositions-img3" class="compositions-imgbox"></div>
+          </a>
+          <h4>言叶之庭</h4>
+        </div>
+        <div class="compositions-box">
+          <a href="#">
+            <div class="img-hover">
+              <span>+</span>
+            </div>
+            <div id="compositions-img4" class="compositions-imgbox"></div>
+          </a>
+          <h4>追逐繁星的孩子</h4>
+        </div>
+        <div class="compositions-box">
+          <a href="#">
+            <div class="img-hover">
+              <span>+</span>
+            </div>
+            <div id="compositions-img5" class="compositions-imgbox"></div>
+          </a>
+          <h4>云之彼端 · 约定之地</h4>
+        </div>
+        <div class="compositions-box">
+          <a href="#">
+            <div class="img-hover">
+              <span>+</span>
+            </div>
+            <div id="compositions-img6" class="compositions-imgbox"></div>
+          </a>
+          <h4>星之声</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="about">
+    <div class="layout clear">
+      <div class="content-head">
+        <h1>故事简介</h1>
+        <h4>部分作品简介</h4>
+      </div>
+      <div class="leftbox">
+        <div id="about-img1" class="left-img"></div>
+        <h4>你的名字</h4>
+        <p>故事发生的地点是在每千年回归一次的彗星造访过一个月之前，日本飞驒市的乡下小镇糸守町。在这里女高中生三叶每天都过着忧郁的生活，而她烦恼的不光有担任镇长的父亲所举行的选举运动，还有家传神社的古老习俗。</p>
+      </div>
+      <div class="rightbox">
+        <div id="about-img2" class="right-img"></div>
+        <h4>秒速5厘米</h4>
+        <p>动画以一个少年为故事轴心而展开连续3个独立故事的动画短篇，时代背景是从1990年代至现代的日本，通过少年的人生展现东京以及其他地区的变迁。第一话《樱花抄》描述贵树与明里年幼时恋爱的心情，以及他们重逢的一天，第二话《宇航员》描述以对进入高中就读的贵树怀有好感的澄田花苗的视角来展现贵树与明里分别后的生活，第三话《秒速5厘米》则刻画了贵树和明里长大后内心的种种彷徨。</p>
+      </div>
+      <div class="leftbox">
+        <div id="about-img3" class="left-img">
+        </div>
+        <h4>言叶之庭</h4>
+        <p>《言叶之庭》的故事发生在现代东京，故事讲述了以制鞋人为目标的少年秋月和神秘女子雪野的恋爱故事。故事源于万叶集开篇的“孤悲”之恋，作品中透露出鞋、万叶集、日本庭园、雨等因素。</p>
+      </div>
+      <div id="lastbox" class="rightbox">
+        <div id="about-img4" class="right-img"></div>
+        <h4>追逐繁星的孩子</h4>
+        <p>故事环绕著女主角明日菜的冒险展开。主人公明日菜自从父亲死后，当护士的妈妈也因为工作繁忙而很少回家，明日菜便一直过著孤独寂寞的生活。有一天，透过从她爸爸留给她的水晶收音机遗物中，突然传出了不可思议的音乐，这首不可思议的音乐同时改变了她的日常生活。明日菜决定追寻著这把来自远方的声音而展开了新的冒险之旅，只为了再与一个生活在异国的男孩再相遇而来到了地下世界雅戈泰，最后明日菜终于明白，自己之所以开始这场冒险只是因为 ..</p>
+      </div>
+      
+    </div>
+    
+  </div>
+  <div id="social">
+    <div class="layout">
+      <div class="content-head">
+        <h1>社交资讯</h1>
+        <h4>社交互动、最新消息、同好交流</h4>
+      </div>
+      <div class="social-content clear">
+        <div class="social-box">
+          <div id="social-img1" class="social-imgbox"></div>
+          <h4>官方社交网络</h4>
+          <p>发布最新作品信息</p>
+          <div class="iconbox">
+            <a href="#"><i class="iconfont icon-wechat"></i></a>
+            <a href="#"><i class="iconfont icon-facebook"></i></a>
+            <a href="#"><i class="iconfont icon-twitter"></i></a>
+          </div>
+        </div>
+        <div class="social-box">
+          <div id="social-img2" class="social-imgbox"></div>
+          <h4>新海诚电影同好会</h4>
+          <p>电影交流、谈笑风生</p>
+          <div class="iconbox">
+            <a href="#"><i class="iconfont icon-wechat"></i></a>
+            <a href="#"><i class="iconfont icon-facebook"></i></a>
+            <a href="#"><i class="iconfont icon-twitter"></i></a>
+          </div>
+        </div>
+        <div class="social-box">
+          <div id="social-img3" class="social-imgbox"></div>
+          <h4>官方小说</h4>
+          <p>新海诚电影小说交流</p>
+          <div class="iconbox">
+            <a href="#"><i class="iconfont icon-wechat"></i></a>
+            <a href="#"><i class="iconfont icon-facebook"></i></a>
+            <a href="#"><i class="iconfont icon-twitter"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="joinus">
+    <div class="layout">
+      <div class="content-head">
+        <h1>加入会员</h1>
+        <h4>加入我们这个大家庭</h4>
+      </div>
+      <from>
+        <div class="information clear">
+          <div class="infobox">
+            <input id="username" type="text" name="username" placeholder="你的名字 *">
+            <input id="username" type="text" name="username" placeholder="你的邮箱 *">
+            <input id="username" type="text" name="username" placeholder="你的手机 *">
+          </div>
+          <div class="infobox">
+            <textarea name="article" placeholder="自我介绍 *"></textarea>
+          </div>
+        </div>
+        <div class="btn">
+          <input type="submit" value="提交资料" />
+        </div>
+      </from>
+    </div>
+  </div>
+  <div id="footer">
+    <div class="layout clear">
+      <p>@ code by yujingyang</p>
+      <span><a href="">Privacy Policy</a> / <a href="#">Terms of Use</a></span>
+      <div class="iconbox">
+          <a href="#"><i class="iconfont icon-wechat"></i></a>
+            <a href="#"><i class="iconfont icon-facebook"></i></a>
+            <a href="#"><i class="iconfont icon-twitter"></i></a>
+        </div>
+      </div>
+      <div class="footerbox"></div>
+    </div>
+  </footer>
+</body>
+</html>

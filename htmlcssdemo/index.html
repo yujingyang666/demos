@@ -449,13 +449,15 @@ li:hover .drop{
   text-align: center;
   margin-top: 20px;
 }
-.btn a {
+.btn input {
   font-size: 20px;
   display: block;
   display: inline-block;
   padding: 15px 60px;
   color: #FFF;
   text-decoration: none;
+  border:none;
+  outline:none; 
   border-radius: 3px;
   background: #00B2EE;
   -webkit-transition: background 0.5s;
@@ -464,8 +466,12 @@ li:hover .drop{
   -o-transition: background 1s; 
 }
 
-.btn a:hover {
+.btn input:hover {
   background: #BFEFFF;
+  cursor:pointer;
+}
+.btn input:active {
+  background: yellow;
 }
 #footer  {
   background-size: 100%;
@@ -718,7 +724,7 @@ li:hover .drop{
           </div>
         </div>
         <div class="btn">
-          <a href="#">提交资料</a>
+          <input type="submit" value="提交资料" />
         </div>
       </from>
     </div>

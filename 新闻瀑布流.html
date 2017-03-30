@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .layout {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .content {
+            width: 100%;
+            position: relative;
+        }
+        
+        .clear::after {
+            display: block;
+            content: '';
+            clear: both;
+        }
+        
+        .news {
+            width: 250px;
+            position: absolute;
+            margin: 10px;
+            transition: all 0.5s;
+            border: 1px solid #CCC;
+            padding: 8px;
+            word-wrap: break-word
+        }
+        
+        .box img {
+            width: 100%;
+            background-color: red;
+        }
+        
+        .box h3 {
+            border-bottom: 1px solid #CCC;
+            display: block;
+            padding-bottom: 3px;
+            margin: 10px 0px;
+            font-size: 18px;
+        }
+        
+        .box p {
+            font-size: 14px;
+            color: #888;
+        }
+        .load-more {
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="layout">
+        <div class="content clear"> </div>
+        <p class="load-more">111</p>
+    </div>
+
+    <script>
+        var count = 10,
+            curPage = 1,
+            unlock = true,
+            colLength = parseInt($('.content').width() / 250),
+            boxarr = [];
+        for (var i = 0; i < colLength; i++) {
+            boxarr[i] = 0;
+        }
+
+        getnews()
+        $(window).on('scroll', function () {
+            if (isVisible($('.load-more'))) {
+                getnews();
+            }
+        })
+
+        function getnews() { //获取新闻函数
+            if (!unlock) {
+                return;
+            }
+            $.ajax({
+                url: 'https://platform.sina.com.cn/slide/album_tech',
+                dataType: 'jsonp',
+                jsonp: "jsoncallback",
+                data: {
+                    app_key: '1271687855',
+                    num: count,
+                    page: curPage
+                }
+            }).done(function (news) {
+                render(news) //获取成功后渲染
+                curPage++
+                unlock = true
+
+            }).fail(function () {
+                alert('网络出错了');
+            })
+            unlock = false
+
+        }
+
+        function render(news) { //渲染函数
+            $(news.data).each(function () {
+                var html = '';
+                html += '<div class="news">'
+                html += '<div class="box">'
+                html += '<a href="' + this.url + '"><img src="' + this.img_url + '" alt="" class="img"></a>'
+                html += '<h3>' + this.short_name + '</h3>'
+                html += '<p>' + this.short_intro + '</p></div></div>'
+                $(html).each(function () {
+                    var dom = this
+                    $('.content').append($(dom))
+                    $(dom).find("img").load(function () { //等到图片加载完才布局
+
+                        flowingWater(dom)
+                    })
+                })
+
+
+            })
+        }
+
+        function flowingWater(data) { //流水布局函数
+            var minVal = Math.min.apply(null, boxarr)
+            var minIdx = boxarr.indexOf(minVal)
+            $(data).css({
+                top: boxarr[minIdx],
+                left: $(data).outerWidth(true) * minIdx
+            })
+            boxarr[minIdx] += $(data).outerHeight(true)
+            $('.content').css({
+                height: boxarr[minIdx]
+            })
+
+        }
+
+        function isVisible($node) { //判断是否在屏幕中
+            var scrollTop = $(window).scrollTop()
+            var windowHeight = $(window).height()
+            var offsetTop = $node.offset().top
+            var nodeHeight = $node.outerHeight(true);
+            if (windowHeight + scrollTop > offsetTop && scrollTop < offsetTop + nodeHeight) {
+                return true;
+            } else {
+                return false
+            }
+        }
+    </script>
+</body>
+
+</html>

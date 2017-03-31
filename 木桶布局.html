@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-size: 0px;
+        }
+        
+        .content {
+            width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .img-row {
+            margin-bottom: 6px;
+        }
+        
+        .img-box {
+            display: inline-block;
+            margin: 0px 3px;
+        }
+        
+        .load {
+            background-color: red;
+            font-size: 10px;
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <img src="" alt="">
+    </div>
+    <div class="load">111111</div>
+
+    <!--思路：1、加载图片,建立图片信息对象
+         2、把图片放入数组，跟容器宽度比较
+         3、当数组图片总宽度大于容器宽度时，把最后的加图片去掉，把数组现有图片渲染
+         4、渲染完毕后把数组清空，继续操作2
+         5、若load显示在屏幕，继续加载图片-->
+
+    <script>
+        var imglist = []
+        var lock = true;
+
+        function Barrel($ct) {
+            console.log(this)
+            this.$ct = $ct;
+            this.rowlist = imglist;
+            this.loadImg();
+            this.lazyload();
+
+        }
+
+        Barrel.prototype = {
+            loadImg: function () {
+                var _this = this
+                var imgurls = getImgUrls(30)
+                console.log(imgurls)
+                $(imgurls).each(function (idx, url) { //这里最好不用for循环，因为onload是异步,如果要用for循环则onload要立即执行函数
+                    var img = new Image();
+                    img.src = url
+                    img.onload = function () {
+                        var ratio = img.width / img.height,
+                            baseheight = 120,
+                            basewidth = 120 * ratio
+
+                        var imginfo = {
+                            target: $(img),
+                            width: basewidth + 6,
+                            height: baseheight,
+                            ratio: ratio
+                        }
+                        console.log(imginfo)
+                        _this.render(imginfo)
+                    }
+
+                })
+
+            },
+
+            render: function (imginfo) {
+                var _this = this,
+                    rowwidth = 0,
+                    newRowheight = 0,
+                    contentwidth = this.$ct.width()
+                lastImg = imginfo
+                console.log('lastImg' + lastImg)
+                this.rowlist.push(imginfo)
+                for (i = 0; i < this.rowlist.length; i++) {
+                    rowwidth += this.rowlist[i].width
+                    // console.log(contentwidth)
+                    if (rowwidth > contentwidth) {
+                        this.rowlist.pop()
+                        console.log(rowwidth)
+                        rowwidth = rowwidth - lastImg.width
+                        newRowheight = contentwidth / (rowwidth / lastImg.height)
+                        this.createRow(newRowheight)
+                        this.rowlist = []
+                        this.rowlist.push(imginfo)
+
+
+                    }
+                }
+
+
+            },
+
+            lazyload: function () { //懒加载，感觉这样写很不好
+                var _this = this
+                $(window).on('scroll', function () {
+                    if (isVisible($('.load'))) {
+                        if (lock = false) {
+                            return
+                        }
+                        lock = false;
+                        _this.loadImg();
+                    }
+                    lock = true;
+                })
+            },
+            
+            createRow: function (newRowheight) {
+                var $rowct = $('<div class="img-row"></div>')
+                $(this.rowlist).each(function (idx, imginfo) {
+                    var $imgct = $('<div class="img-box"></div>'),
+                        $img = imginfo.target
+                    $img.height(newRowheight);
+                    $imgct.append($img);
+                    $rowct.append($imgct);
+                })
+                this.$ct.append($rowct);
+            }
+        }
+
+        function getImgUrls(num) {
+            var width, height, urls = []
+            for (var i = 0; i < num; i++) {
+                width = Math.floor(Math.random() * 300 + 50);
+                height = Math.floor(Math.random() * 100 + 50);
+                urls.push('https://unsplash.it/' + width + '/' + height)
+
+            }
+            return urls;
+        }
+
+
+        function isVisible($node) {
+            var scrollTop = $(window).scrollTop()
+            var windowHeight = $(window).height()
+            var offsetTop = $node.offset().top
+            var nodeHeight = $node.outerHeight(true);
+            if (windowHeight + scrollTop > offsetTop && scrollTop < offsetTop + nodeHeight) {
+                return true;
+            } else {
+                return false
+            }
+        }
+        var Barrel = new Barrel($('.content'))
+    </script>
+</body>
+
+</html>

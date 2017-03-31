@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    .box {
+        margin: 50px auto;
+        border: 2px solid #AAA;
+        text-align: center;
+        width: 400px;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <h2>超准天气预报</h2>
+        <input type="text" id='getcity' placeholder='请输入城市'>
+        <button id='btn'>获取天气</button>
+        <p id='city'>城市：</p>
+        <p id='date'>温度：</p>
+        <p id='weather'>天气：</p>
+        <p id='wind'>风速：</p>
+        <p id='pm'>PM2.5：</p>
+    </div>
+    <script>
+        var ct = document.getElementById('ct')
+        var btn = document.getElementById('btn')
+        var city = ''
+        var data = {}
+        var currentCity = document.getElementById('city')
+        var date = document.getElementById('date')
+        var weather = document.getElementById('weather')
+        var wind = document.getElementById('wind')
+        var pm = document.getElementById('pm')
+        btn.addEventListener('click', function () {
+            city = document.getElementById('getcity').value;
+            getweather()
+        })
+
+        function getweather() {
+            var xhr = new XMLHttpRequest()
+            xhr.open('get', 'http://api.jirengu.com/weather.php?city=' + city, true)
+            xhr.send()
+            xhr.onload = function () {
+                if (xhr.readyState == 4) {
+                    if ((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304) {
+                        data = JSON.parse(xhr.responseText)
+                        if (data.error === -2 || data.error === -3) {
+                            alert('请正确输入城市名字')
+                        }
+                        currentCity.innerText = '城市：' + data.results[0].currentCity
+                        date.innerText = '温度：' + data.results[0].weather_data[0].date
+                        weather.innerText = '天气：' + data.results[0].weather_data[0].weather
+                        wind.innerText = '风速：' + data.results[0].weather_data[0].wind
+                        pm.innerText = 'pm2.5：' + data.results[0].pm25
+
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

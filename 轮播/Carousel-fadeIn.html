@@ -3,8 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
-    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <title>渐变轮播</title>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -153,72 +153,59 @@
             isAnimate = false
 
         barliGetImg()
-        $imgct.find('li').eq('0').css('display','block')
+        $imgct.find('li').eq('0').css('display', 'block')
         $imgct.width(imgWidth * $imgct.find('li').length)
         carouselindex = 0;
 
         autoplay()
 
         $('.arrow-next').on('click', function () {
-            turn(carouselindex+1)
+            turn(carouselindex + 1)
         })
         $('.arrow-pro').on('click', function () {
-            turn(carouselindex-1)
+            turn(carouselindex - 1)
         })
         $('.bar-ct').find('li').on('click', function () {
-            var barindex=($(this).index())
+            var barindex = ($(this).index())
             console.log(barindex)
             turn(barindex)
         })
 
         function turn(idx) {
-            if (isAnimate) {return}
-            if (carouselindex===idx){return}
-            isAnimate = true;
-            $imgct.find('li').eq(carouselindex).fadeOut(500)
-            if(idx<0){idx=$imgct.find('li').length-1}
-            if(idx>$imgct.find('li').length-1){idx=0}
-            $imgct.find('li').eq(idx).fadeIn(500,function(){
-                carouselindex=idx
-                $barli.removeClass('active')
-                $barli.eq(carouselindex).addClass('active')
-                isAnimate = false;
-                
-            })
-
-        }
-                
-
-        function Pro(n) {
             if (isAnimate) {
-                return;
+                return
+            }
+            if (carouselindex === idx) {
+                return
             }
             isAnimate = true;
-            $imgct.animate({
-                left: '+=' + imgWidth * n
-            }, function () {
-                carouselindex -= n
-                if (carouselindex < 0) {
-                    $imgct.css('left', -($imgct.find('li').length - 2) * imgWidth);
-                    carouselindex = $imgct.find('li').length - 3;
-                }
+            $imgct.find('li').eq(carouselindex).fadeOut(500)
+            if (idx < 0) {
+                idx = $imgct.find('li').length - 1
+            }
+            if (idx > $imgct.find('li').length - 1) {
+                idx = 0
+            }
+            $imgct.find('li').eq(idx).fadeIn(500, function () {
+                carouselindex = idx
                 $barli.removeClass('active')
                 $barli.eq(carouselindex).addClass('active')
                 isAnimate = false;
-            })
-        }
 
+            })
+
+        }
 
         function barliGetImg() {
             $imgct.find('li').each(function () {
                 $barli.eq($(this).index()).find('img')
-                      .attr('src', $(this).find('img').attr('src'))
+                    .attr('src', $(this).find('img').attr('src'))
             })
         }
 
         function autoplay() {
             clock = setInterval('turn(carouselindex+1)', 2000)
-         }
+        }
     </script>
 </body>
 

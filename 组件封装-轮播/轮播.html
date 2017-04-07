@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>渐变轮播</title>
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .clear::after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+        
+        .layout {
+            width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .carousel {
+            width: 1000px;
+            height: 500px;
+            background-color: #DDD;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        li {
+            list-style: none;
+        }
+        
+        .img-ct {
+            position: relative;
+        }
+        
+        .img-ct li {
+            width: 1000px;
+            height: 500px;
+            display: none;
+            position: absolute;
+        }
+        
+        .arrow {
+            position: absolute;
+            top: 50%;
+            margin-top: -25px;
+            width: 30px;
+            height: 50px;
+            background-color: rgba(0, 0, 0, 1);
+            text-decoration: none;
+            color: #FFF;
+            font-size: 20px;
+            line-height: 50px;
+            text-align: center;
+            border-radius: 5px;
+            opacity: 0.5;
+        }
+        
+        .arrow:hover {
+            opacity: 0.8;
+        }
+        
+        .arrow-pro {
+            left: 10px;
+        }
+        
+        .arrow-next {
+            right: 10px;
+        }
+        
+        .bar {
+            display: block;
+            text-align: center;
+            position: absolute;
+            bottom: 30px;
+            width: 100%;
+            font-size: 0px;
+        }
+        
+        .bar-ct {
+            display: inline-block;
+            padding: 0;
+        }
+        
+        .bar-ct>li {
+            display: inline-block;
+            width: 150px;
+            height: 75px;
+            margin: 0px 10px;
+            border: 1px solid #EEE;
+        }
+        
+        .active {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.6);
+        }
+        
+        .bar-ct img {
+            width: 150px;
+            height: 75px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="layout">
+        <div class="carousel" id='id1'>
+            <ul class="img-ct clear">
+                <li>
+                    <a href="javaScript:void(0)"><img src="./img/1.jpg" alt=""></a>
+                </li>
+                <li>
+                    <a href="javaScript:void(0)"><img src="./img/2.jpg" alt=""></a>
+                </li>
+                <li>
+                    <a href="javaScript:void(0)"><img src="./img/3.jpg" alt=""></a>
+                </li>
+                <li>
+                    <a href="javaScript:void(0)"><img src="./img/4.jpg" alt=""></a>
+                </li>
+            </ul>
+            <a href="javaScript:void(0)" class="arrow-pro arrow">
+                <</a>
+                    <a href="javaScript:void(0)" class="arrow-next arrow">></a>
+                    <div class="bar">
+                        <ul class="bar-ct clear">
+                            <li class="active">
+                                <a href="javaScript:void(0)"><img src="" alt=""></a>
+                            </li>
+                            <li>
+                                <a href="javaScript:void(0)"><img src="" alt=""></a>
+                            </li>
+                            <li>
+                                <a href="javaScript:void(0)"><img src="" alt=""></a>
+                            </li>
+                            <li>
+                                <a href="javaScript:void(0)"><img src="" alt=""></a>
+                            </li>
+                        </ul>
+                    </div>
+        </div>
+        <div class="carousel" id='id2'>
+            <ul class="img-ct clear">
+                <li>
+                    <a href="javaScript:void(0)"><img src="./img/1.jpg" alt=""></a>
+                </li>
+                <li>
+                    <a href="javaScript:void(0)"><img src="./img/2.jpg" alt=""></a>
+                </li>
+                <li>
+                    <a href="javaScript:void(0)"><img src="./img/3.jpg" alt=""></a>
+                </li>
+                <li>
+                    <a href="javaScript:void(0)"><img src="./img/4.jpg" alt=""></a>
+                </li>
+            </ul>
+            <a href="javaScript:void(0)" class="arrow-pro arrow">
+                <</a>
+                    <a href="javaScript:void(0)" class="arrow-next arrow">></a>
+                    <div class="bar">
+                        <ul class="bar-ct clear">
+                            <li class="active">
+                                <a href="javaScript:void(0)"><img src="" alt=""></a>
+                            </li>
+                            <li>
+                                <a href="javaScript:void(0)"><img src="" alt=""></a>
+                            </li>
+                            <li>
+                                <a href="javaScript:void(0)"><img src="" alt=""></a>
+                            </li>
+                            <li>
+                                <a href="javaScript:void(0)"><img src="" alt=""></a>
+                            </li>
+                        </ul>
+                    </div>
+        </div>
+    </div>
+    <script>
+        var Carousel = (function () {
+            function _Carousel($ct) {
+                this.$ct = $ct
+                this.init()
+                this.bind()
+
+            }
+            _Carousel.prototype = {
+                init: function () {
+                    this.$imgct = this.$ct.find('.img-ct')
+                    this.$barli = this.$ct.find('.bar-ct li')
+                    this.$firstImg = this.$imgct.find('li').first()
+                    this.$lastImg = this.$imgct.find('li').last()
+                    this.imgWidth = this.$firstImg.width()
+                    this.isAnimate = false
+                },
+                bind: function () {
+                    this.barliGetImg()
+                    var _this = this
+                    console.log(this.$ct.attr('id'))
+                    this.$imgct.find('li').eq('0').css('display', 'block')
+                    this.$imgct.width(this.imgWidth * this.$imgct.find('li').length)
+                    this.carouselindex = 0;
+                    this.autoplay()
+                    this.$ct.find('.arrow-next').on('click', function () {
+                        _this.turn(_this.carouselindex + 1)
+                    })
+                    this.$ct.find('.arrow-pro').on('click', function () {
+                        _this.turn(_this.carouselindex - 1)
+                    })
+                    this.$ct.find('.bar-ct').find('li').on('click', function () {
+                        var barindex = ($(this).index())
+                        console.log(barindex)
+                        _this.turn(barindex)
+                    })
+                },
+                turn: function (idx) {
+                    var _this = this
+                    if (this.isAnimate) {
+                        return
+                    }
+                    if (this.carouselindex === idx) {
+                        return
+                    }
+                    this.isAnimate = true;
+                    this.$imgct.find('li').eq(this.carouselindex).fadeOut(500)
+                    if (idx < 0) {
+                        idx = this.$imgct.find('li').length - 1
+                    }
+                    if (idx > this.$imgct.find('li').length - 1) {
+                        idx = 0
+                    }
+                    this.$imgct.find('li').eq(idx).fadeIn(500, function () {
+                        _this.carouselindex = idx
+                        _this.$barli.removeClass('active')
+                        _this.$barli.eq(_this.carouselindex).addClass('active')
+                        _this.isAnimate = false;
+
+                    })
+                },
+                barliGetImg: function () {
+                    var _this = this
+                    this.$imgct.find('li').each(function () {
+                        _this.$barli.eq($(this).index()).find('img')
+                            .attr('src', $(this).find('img').attr('src'))
+                    })
+                },
+                autoplay: function () {
+                    var _this = this
+                    clock = setInterval(function () {
+                        _this.turn(_this.carouselindex + 1)
+                    }, 2000)
+                }
+            }
+            return {
+                init:function($ct){
+                    $ct.each(function(index, node){
+                        new _Carousel($(node));
+                    })
+                }
+            }
+        })()
+
+
+        Carousel.init($('.carousel'))
+    </script>
+</body>
+
+</html>
